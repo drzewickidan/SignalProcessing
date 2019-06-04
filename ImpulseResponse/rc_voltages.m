@@ -1,0 +1,6 @@
+function [V_c, V_r] = rc_voltages(R, C, A, T, T_end)
+V_c = @(t) (t < T & t > 0) .* A .* (1 - exp(-t/(R*C))) ...
+    + (t >= T) .* A .* (exp(T/(R*C)) - 1) .* exp(-t/(R*C));
+V_r = @(t) (t < T & t > 0) .* A .* exp(-t/(R*C)) ...
+    + (t >= T) .* A .* (1 - exp(T/(R*C))) .* exp(-t/(R*C));
+end
